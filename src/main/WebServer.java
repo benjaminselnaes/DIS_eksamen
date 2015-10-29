@@ -1,8 +1,9 @@
-package example;
+package main;
 
 import com.sun.net.httpserver.HttpServer;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.google.gson.Gson;
+import sdk.Game;
 
 import java.io.IOException;
 
@@ -67,17 +68,24 @@ public class WebServer {
     }
 
     @GET
-    @Path("/result/{gameid}")
+    @Path("/result/{gameId}")
     @Produces("application/json")
-    public String getGame(@PathParam("gameid") String gameid) {
+    public String getGame(@PathParam("{gameId}") String gameId) {
 
         Game game1 = new Game();
-        game1.setGamename("Diablo");
+        Game game2 = new Game();
+
+        game1.setGameId(1);
+        game1.setName("Diablo");
         game1.setResult(100);
 
-        System.out.println(gameid);
+        game2.setGameId(2);
+        game2.setName("Noget");
+        game2.setResult(200);
 
-        return new Gson().toJson(game1);
+        System.out.println(gameId);
+
+        return new Gson().toJson(gameId);
 
     }
 
@@ -174,7 +182,7 @@ public class WebServer {
         System.out.println("Server stopped");
     }
 
-    class Game {
+   /* class Game {
 
         private String gamename;
         private int result;
@@ -195,7 +203,7 @@ public class WebServer {
             return result;
         }
 
-    }
+    }*/
 
     class Control {
 

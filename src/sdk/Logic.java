@@ -32,11 +32,15 @@ public class Logic {
     }
     public static void getUser(int userId){
 
+        String json = new Gson().toJson(userId);
+
+        serverConnection.get(json, "user/{userId}");
+
     }
     public static void getGame(int gameId){
         String json = new Gson().toJson(gameId);
 
-        serverConnection.get(json, "gameId/");
+        serverConnection.get(json, "result/"+gameId);
     }
     public static void joinGame(int gameId, User opponent, String controls){
 
